@@ -1,2 +1,44 @@
-<h1>Tasks#show</h1>
-<p>Find me in app/views/tasks/show.html.erb</p>
+<h1>
+  <a href="/tasks" class="btn btn-floating grey lighten-1"><i class="material-icons">arrow_back</i></a>
+  Task Editing
+</h1>
+<!-- <small>Tasks#show - Find me in app/views/tasks/show.html.erb</small>  -->
+<%= form_for(@task, url: "/tasks/#{@task.id}", html: { method: 'PUT' }) do |f| %>
+
+<div class="input-field col s6">
+  <%= f.text_field :task, :required => true %>
+  <%= f.label :task %>
+</div>
+
+<div class="input-field col s6">
+  <%= f.select(:state, [['todo', 'todo'], ['doing', 'doing'], ['done', 'done']]) %>
+  <%= f.label :state %>
+</div>
+
+<div class="input-field col s6">
+  <%= f.text_field :free_comment %>
+  <%= f.label :free_comment %>
+</div>
+
+<div class="input-field col s6">
+ <%= f.text_field :limit_date, class: "datepicker", :required => true %>
+ <%= f.label :limit_date %>
+</div>
+
+<%= f.submit "edit task", class: "btn" %>
+
+<% end %>
+
+<script>
+  console.log('load')
+  var elems = document.querySelectorAll('.datepicker')
+  var date  = new Date("<%= @task.limit_date %>")
+  var min   = new Date()
+  var instances = M.Datepicker.init(elems, {
+    autoClose      : true,
+    format         : 'yyyy/m/d',
+    defaultDate    : date,
+    setDefaultDate : true,
+    minDate        : min,
+  });
+</script>
