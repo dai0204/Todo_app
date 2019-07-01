@@ -1,0 +1,23 @@
+%h1 SignUp User
+- if @user.errors.any?
+  .card.red.lighten-3
+    .card-content.white-text
+      %span.card-title.red-text.text-darken-3
+        %b
+          = @user.errors.count
+          個の項目に入力不備がありました。
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+.row
+  .col-md-6.col-md-offset-3
+    = form_for(@user) do |f|
+      = f.label :name
+      = f.text_field :name, class: 'form-control', :required => true
+      = f.label :email
+      = f.email_field :email, class: 'form-control', :required => true
+      = f.label :password
+      = f.password_field :password, class: 'form-control', :required => true
+      = f.label :password_confirmation, "Confirmation", :required => true
+      = f.password_field :password_confirmation, class: 'form-control'
+      = f.submit "Create my account", class: "btn"
