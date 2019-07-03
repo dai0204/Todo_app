@@ -3,18 +3,10 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title ToDo
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    / Compiled and minified CSS
-    %meta{:content => "Ruby on Railsのチュートリアルアプリです。", :name => "description"}/
     %meta{:content => "width=device-width,initial-scale=1.0", :name => "viewport"}/
     %meta{:content => "telephone=no,address=no,email=no", :name => "format-detection"}/
-    %link{:href => "作者：tosite(@mao_sum)", :rel => "canonical"}/
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css", :rel => "stylesheet"}/
-    / Compiled and minified JavaScript
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"}
     :css
       body {
@@ -36,21 +28,11 @@
           %i.material-icons menu
         %ul.right.hide-on-med-and-down
           - if is_login?
-            %li= link_to "Logout", logout_path, method: :delete
+            %li= link_to "ログアウト", logout_path, method: :delete
           - else
             %li= link_to "Signup", signup_path
             %li= link_to "Login", login_path
-    %ul#mobile-demo.sidenav
-      - if is_login?
-        %li= link_to "Logout", logout_path, method: :delete
-      - else
-        %li= link_to "Signup", signup_path
-        %li= link_to "Login", login_path
     %main.container
       = yield
     %footer.page-footer.grey.darken-3{:style => "padding-top: 0;"}
       %p.right-align{:style => "margin-right: 10px;"} To do
-    :javascript
-      <haml_silent>     flash.each do |key, val| 
-      </haml_silent><haml_block>    M.toast({html: '#{val}'})
-      </haml_block>

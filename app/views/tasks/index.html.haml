@@ -1,7 +1,6 @@
 %h1
   = @auth.name
   's Task List
-/ <p><small>Tasks#index - Find me in app/views/tasks/index.html.erb</small></p>
 - if @task.errors.any?
   .card.red.lighten-3
     .card-content.white-text
@@ -80,21 +79,3 @@
           %td
             = link_to("/tasks/#{t.id}", class: "btn red btn-floating btn-small", method: "DELETE") do
               %i.material-icons delete
-  - @auth.tasks.each do |t|
-    - if t.free_comment.length == 0
-    - next
-    - end
-    / Modal Structure
-    .modal{:id => "comment-#{t.id}"}
-      .modal-content
-        %h4= t.task
-        %p= t.free_comment
-- end # !@auth.tasks.nil?
-:javascript
-  var elems = document.querySelectorAll('.datepicker')
-  var min   = new Date()
-  var instances = M.Datepicker.init(elems, {
-    autoClose      : true,
-    format         : 'yyyy/m/d',
-    minDate        : min,
-  });
