@@ -64,5 +64,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'haml-rails'
 gem 'erb2haml'
-gem 'kaminari', '~> 0.17.0'
-gem 'bootstrap-sass'

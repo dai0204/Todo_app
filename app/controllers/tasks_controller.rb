@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
   def index
     auth
-    # @tasks  = Task.order('limit_date').all
     @task   = Task.new
     @status = ['todo', 'doing', 'done']
   end
@@ -29,7 +28,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    # puts params
     id   = params[:id]
     task = Task.find(id)
     t    = task_params
@@ -40,13 +38,9 @@ class TasksController < ApplicationController
     task.free_comment = t.has_key?(:free_comment) ? t[:free_comment] : task.free_comment
 
     respond_to do |format|
-      if task.save
-        format.html { redirect_to '/tasks', notice: 'タスクを更新しました。' }
-        format.json { render :show, status: :created, location: task }
-      else
-        format.html { redirect_to "/tasks/#{id}", notice: "タスク更新に失敗しました。（理由：#{@task.errors.full_messages[0]}）" }
-        format.json { render json: task.errors, status: :unprocessable_entity }
-      end
+     task.save
+      format.html { redirect_to '/tasks', notice: 'タスクを更新しました。' }
+      format.json { render :show, status: :created, location: task }
     end
   end
 

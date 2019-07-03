@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ToDo</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <meta name="viewport"         content="width=device-width,initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no,address=no,email=no">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <style>
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  main {
+    flex: 1 0 auto;
+  }
+</style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper teal">
+      <% if is_login? %>
+      <a href="/tasks" class="brand-logo">ToDo</a>
+      <% else %>
+      <a href="/" class="brand-logo">ToDo</a>
+      <% end %>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <% if is_login? %>
+        <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+        <% else %>
+        <li><%= link_to "新規登録", signup_path %></li>
+        <li><%= link_to "ログイン", login_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
+
+
+  <main class="container">
+    <%= yield %>
+  </main>
+  <footer class="page-footer grey darken-3" style="padding-top: 0;">
+    <p class="right-align" style="margin-right: 10px;">To do</p>
+  </footer>
+  <script>
+    console.log('dom')
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+    var elems = document.querySelectorAll('.datepicker');
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems);
+    <% flash.each do |key, val| %>
+    M.toast({html: '<%= val %>'})
+    <% end %>
+  </script>
+</body>
+</html>

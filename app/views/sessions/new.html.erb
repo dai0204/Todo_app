@@ -1,0 +1,15 @@
+<h1>Login Form</h1>
+
+<div class="row">
+  <%= form_for(:session, url: login_path) do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control', :required => true %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, class: 'form-control', :required => true %>
+
+  <%= f.submit "ログイン", class: 'btn' %>
+  <% end %>
+  <p><%= link_to '新規登録', signup_path %></p>
+
+</div>
